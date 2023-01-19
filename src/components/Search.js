@@ -3,9 +3,6 @@ import styled from 'styled-components';
 import { MdSearch } from 'react-icons/md';
 import { GithubContext } from '../context/context';
 const Search = () => {
-  const data = React.useContext(GithubContext);
-  console.log(data);
-
   return <h2>search component</h2>;
 };
 
