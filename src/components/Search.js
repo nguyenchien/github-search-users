@@ -4,7 +4,9 @@ import { MdSearch } from 'react-icons/md';
 import { GithubContext } from '../context/context';
 const Search = () => {
   const data = React.useContext(GithubContext);
-  return <h2>search component: {data}</h2>;
+  console.log(data);
+
+  return <h2>search component</h2>;
 };
 
 const Wrapper = styled.div`
