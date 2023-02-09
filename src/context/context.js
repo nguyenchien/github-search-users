@@ -38,6 +38,10 @@ const GithubProvider = ({children}) => {
     setError({show, msg});
   }
   
+  const searchGithubUser = async(user) => {
+    console.log(user);
+  }
+  
   useEffect(()=>{
     checkRequest();
   },[]);
@@ -49,6 +53,7 @@ const GithubProvider = ({children}) => {
       followers,
       request,
       error,
+      searchGithubUser
     }}>{children}</GithubContext.Provider>
   )
 }
