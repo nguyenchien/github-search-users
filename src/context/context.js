@@ -22,7 +22,7 @@ const GithubProvider = ({children}) => {
       let {
         rate: {remaining}
       } = data;
-      console.log(remaining);
+      setRequest(remaining);
     })
     .catch((err) => {
       console.log(err);
@@ -38,6 +38,7 @@ const GithubProvider = ({children}) => {
       githubUser,
       repos,
       followers,
+      request
     }}>{children}</GithubContext.Provider>
   )
 }
