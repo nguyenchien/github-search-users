@@ -24,7 +24,7 @@ const GithubProvider = ({children}) => {
         rate: {remaining}
       } = data;
       setRequest(remaining);
-      remaining = 0;
+      
       if (remaining === 0) {
         toogleError(true, 'sorry! you have exceeded your hourly rate limit');
       }
