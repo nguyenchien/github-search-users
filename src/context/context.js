@@ -39,7 +39,17 @@ const GithubProvider = ({children}) => {
   }
   
   const searchGithubUser = async(user) => {
-    console.log(user);
+    if (user) {
+      const response = await axios(`${rootUrl}/users/${user}`)
+      .catch((err)=>{
+        console.log(err);
+      });
+      if (response && response.data) {
+        console.log(response.data);
+      } else {
+        toogleError(true, 'user not found!');
+      }
+    }
   }
   
   useEffect(()=>{
