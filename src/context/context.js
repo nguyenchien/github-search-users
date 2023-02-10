@@ -14,6 +14,8 @@ const GithubProvider = ({children}) => {
   const [githubUser, setGithubUser] = useState(mockUser);
   const [repos, setRepos] = useState(mockRepos);
   const [followers, setFollowers] = useState(mockFollowers);
+
+  const [isLoading, setIsLoading] = useState(false);
   const [request, setRequest] = React.useState(0);
   const [error, setError] = useState({show: false, msg: ''});
   
@@ -39,6 +41,7 @@ const GithubProvider = ({children}) => {
   }
   
   const searchGithubUser = async(user) => {
+    setIsLoading(true);
     if (user) {
       const response = await axios(`${rootUrl}/users/${user}`)
       .catch((err)=>{
@@ -46,8 +49,10 @@ const GithubProvider = ({children}) => {
       });
       if (response && response.data) {
         console.log(response.data);
+        setIsLoading(false);
       } else {
         toogleError(true, 'user not found!');
+        setIsLoading(false);
       }
     }
   }
@@ -63,7 +68,8 @@ const GithubProvider = ({children}) => {
       followers,
       request,
       error,
-      searchGithubUser
+      searchGithubUser,
+      isLoading,
     }}>{children}</GithubContext.Provider>
   )
 }
