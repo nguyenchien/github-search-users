@@ -49,11 +49,10 @@ const GithubProvider = ({children}) => {
       });
       if (response && response.data) {
         console.log(response.data);
-        setIsLoading(false);
       } else {
         toogleError(true, 'user not found!');
-        setIsLoading(false);
       }
+      setIsLoading(false);
     }
   }
   
