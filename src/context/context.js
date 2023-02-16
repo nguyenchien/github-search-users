@@ -48,7 +48,19 @@ const GithubProvider = ({children}) => {
         console.log(err);
       });
       if (response && response.data) {
-        console.log(response.data);
+        setGithubUser(response.data);
+        const {login, followers_url} = response.data;
+        // update repos
+        await axios(`${rootUrl}/users/${login}/repos?per_page=100`)
+        .then((response)=>{
+          setRepos(response.data);
+        });
+        
+        // update followers
+        await axios(`${followers_url}?per_page=100`)
+        .then((response)=>{
+          setFollowers(response.data);
+        });
       } else {
         toogleError(true, 'user not found!');
       }
