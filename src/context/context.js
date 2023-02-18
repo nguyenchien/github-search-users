@@ -50,16 +50,17 @@ const GithubProvider = ({children}) => {
       if (response && response.data) {
         setGithubUser(response.data);
         const {login, followers_url} = response.data;
-        // update repos
-        await axios(`${rootUrl}/users/${login}/repos?per_page=100`)
-        .then((response)=>{
-          setRepos(response.data);
-        });
-        
-        // update followers
-        await axios(`${followers_url}?per_page=100`)
-        .then((response)=>{
-          setFollowers(response.data);
+        await Promise.allSettled([
+          axios(`${rootUrl}/users/${login}/repos?perpage=100`),
+          axios(`${followers_url}?perpage=100`)
+        ]).then((result)=>{
+          const [repos, followers] = result;
+          if (repos.status === 'fulfilled') {
+            setRepos(repos.value.data)
+          }
+          if (followers.status === 'fulfilled') {
+            setFollowers(followers.value.data)
+          }
         });
       } else {
         toogleError(true, 'user not found!');
